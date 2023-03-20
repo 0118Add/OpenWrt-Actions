@@ -1,3 +1,8 @@
+# 修复
+https://github.com/jerrykuku/luci-app-vssr/issues/157#issuecomment-1002127004
+
+
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/jerrykuku/staff/master/helloworld-logo1.png" width="500px"  >
   <h1 align="center">
