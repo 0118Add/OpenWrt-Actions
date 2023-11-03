@@ -234,7 +234,7 @@ function refresh_data()
 	local icount = 0
 
 	if set == 'gfw_data' then
-		refresh_cmd = 'wget-ssl --no-check-certificate https://cdn.jsdelivr.net/gh/gfwlist/gfwlist/gfwlist.txt -O /tmp/gfw.b64'
+		refresh_cmd = 'wget --no-check-certificate https://cdn.jsdelivr.net/gh/gfwlist/gfwlist/gfwlist.txt -O /tmp/gfw.b64'
 		sret = luci.sys.call(refresh_cmd .. ' 2>/dev/null')
 		if sret == 0 then
 			luci.sys.call('/usr/bin/vssr-gfw')
@@ -256,7 +256,7 @@ function refresh_data()
 		end
 	elseif set == 'ip_data' then
 		local ip_data_url = uci:get("vssr", "@socks5_proxy[0]", "ip_data_url")
-		refresh_cmd = "wget-ssl -O- '" .. ip_data_url .. "' > /tmp/china_ssr.txt 2>/dev/null"
+		refresh_cmd = "wget -O- '" .. ip_data_url .. "' > /tmp/china_ssr.txt 2>/dev/null"
 		sret = luci.sys.call(refresh_cmd)
 		icount = luci.sys.exec('cat /tmp/china_ssr.txt | wc -l')
 		if sret == 0 and tonumber(icount) > 1000 then
@@ -273,7 +273,7 @@ function refresh_data()
 		luci.sys.exec('rm -f /tmp/china_ssr.txt ')
 	else
 		local need_process = 0
-		refresh_cmd = 'wget-ssl --no-check-certificate -O - https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt > /tmp/adnew.conf'
+		refresh_cmd = 'wget --no-check-certificate -O - https://easylist-downloads.adblockplus.org/easylistchina+easylist.txt > /tmp/adnew.conf'
 		need_process = 1
 		sret = luci.sys.call(refresh_cmd .. ' 2>/dev/null')
 		if sret == 0 then
