@@ -1,0 +1,97 @@
+
+#===============================================
+# Description: Update synchronization checker
+# Lisence: MIT
+# By：Jejz
+#===============================================
+
+name: Update synchronization checker
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  #schedule:
+    #- cron: 16 1 * * * 
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  New-Update-Files:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo timedatectl set-timezone "$TZ"
+        pwd
+        rm -rf ./backup/kernel
+        mkdir -p ./backup/kernel
+        #svn export https://github.com/ophub/kernel/trunk/pub/stable ./backup/kernel --force
+        #svn export https://github.com/breakings/OpenWrt/trunk/opt/kernel ./backup/kernel --force
+        #rm -rf ./backup/kernel/5.10.*
+        #rm -rf ./backup/kernel/5.4.*
+        
+    - name: Download kernel5.4/5.15
+      uses: robinraju/release-downloader@main
+      with:
+        repository: "Jejz168/compile-kernel"
+        tag: "kernel_stable"
+        #latest: true
+        fileName: "*"
+        tarBall: true
+        out-file-path: ./backup/kernel
+        
+    - name: Download kernel5.15
+      uses: robinraju/release-downloader@main
+      with:
+        repository: "Jejz168/compile-kernel"
+        tag: "kernel_Stable"
+        #latest: true
+        fileName: "*"
+        tarBall: true
+        out-file-path: ./backup/kernel
+        
+    - name: Release tar
+      run: |
+        cd ./backup/kernel
+        find ./ -name *stable*|xargs rm -rf
+        find ./ -name *compile*|xargs rm -rf
+        ls ./*.tar.gz |xargs -n1 tar xzvf
+        #ls ./*.zip | xargs -n1 unzip -o
+        rm -rf ./*gz
+        #rm -rf ./*zip
+        
+    - name: Commit
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+        git add .
+        git commit -m"action:`date`"
+        git pull --rebase
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GH_TOKEN }}
+                    
+    - name: Telegram notification upload success
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+           ҉ 🎡Kernel同步成功 ҉
+           
+           
+    - name: Push notification
+      run: |
+        MSG="
+         ҉ 🎡Kernel同步成功 ҉
+        "
+        curl "http://www.pushplus.plus/send?token=${{ secrets.PUSH_PLUS_TOKEN }}" -d "title=Kernel同步成功&content=${MSG}"
