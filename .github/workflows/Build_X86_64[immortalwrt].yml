@@ -18,9 +18,9 @@ env:
   DIY_P1_SH: diy_script/immo_diy/x86/diy-part1.sh
   DIY_P2_SH: diy_script/immo_diy/x86/diy-part2.sh
   CLASH_KERNEL: amd64
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_CONFIG: false
-  UPLOAD_FIRMWARE: false
+  UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
   FIRMWARE_TAG: immortalwrt-x86_64
