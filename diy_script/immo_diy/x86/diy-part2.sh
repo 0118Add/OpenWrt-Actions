@@ -48,7 +48,7 @@ sed -i 's#top -n1#\/bin\/busybox top -n1#g' feeds/luci/modules/luci-base/root/us
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 
 # 报错修复
-sed -i 's/+libpcre/+libpcre2/g' package/feeds/telephony/freeswitch/Makefile
+#sed -i 's/+libpcre/+libpcre2/g' package/feeds/telephony/freeswitch/Makefile
 
 # merge_package 复制 仓库下的文件夹 git clone 复制整个仓库
 
