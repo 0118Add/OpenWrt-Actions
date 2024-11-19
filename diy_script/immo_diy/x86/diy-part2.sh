@@ -101,7 +101,7 @@ popd
 # 自定义默认配置
 sed -i '/exit 0$/d' package/emortal/default-settings/files/99-default-settings
 cat $GITHUB_WORKSPACE/diy_script/immo_diy/x86/99-default-settings package/emortal/default-settings/files/99-default-settings
-cp -f $GITHUB_WORKSPACE/personal/banner-immo package/base-files/files/etc/banner
+cp -f $GITHUB_WORKSPACE/personal/banner2 package/base-files/files/etc/banner
 # wget -O ./package/base-files/files/etc/banner https://raw.githubusercontent.com/Jejz168/OpenWrt/main/personal/banner
 
 # 补充 firewall4 luci 中文翻译
