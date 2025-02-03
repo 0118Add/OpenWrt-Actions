@@ -93,6 +93,9 @@ git clone https://github.com/morytyann/OpenWrt-mihomo  package/openwrt-mihomo
 # alist
 #git clone https://$github/sbwml/openwrt-alist package/new/alist
 
+# amlogic
+git clone https://github.com/ophub/luci-app-amlogic package/amlogic
+
 # unblockneteasemusic
 git clone https://$github/UnblockNeteaseMusic/luci-app-unblockneteasemusic package/luci-app-unblockneteasemusic
 sed -i 's/解除网易云音乐播放限制/音乐云解锁/g' package/luci-app-unblockneteasemusic/root/usr/share/luci/menu.d/luci-app-unblockneteasemusic.json
