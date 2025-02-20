@@ -9,13 +9,13 @@ rm -rf feeds/packages/lang/node
 git clone https://$github/sbwml/feeds_packages_lang_node-prebuilt feeds/packages/lang/node -b packages-24.10
 
 # default settings
-git clone https://$github/sbwml/default-settings package/new/default-settings -b openwrt-24.10
+git clone https://$github/sbwml/default-settings package/default-settings -b openwrt-24.10
 
 # 设置 root 用户密码为 password
 sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.::0:99999:7:::/g' package/base-files/files/etc/shadow
 
 # wwan
-git clone https://github.com/sbwml/wwan-packages package/new/wwan
+git clone https://github.com/sbwml/wwan-packages package/wwan
 
 # pcre - 8.45
 mkdir -p package/libs/pcre
@@ -24,7 +24,7 @@ curl -s $mirror/openwrt/patch/pcre/Config.in > package/libs/pcre/Config.in
 
 # lrzsz - 0.12.20
 rm -rf feeds/packages/utils/lrzsz
-git clone https://$github/sbwml/packages_utils_lrzsz package/new/lrzsz
+git clone https://$github/sbwml/packages_utils_lrzsz package/lrzsz
 
 # irqbalance: disable build with numa
 curl -s $mirror/openwrt/patch/irqbalance/011-meson-numa.patch > feeds/packages/utils/irqbalance/patches/011-meson-numa.patch
