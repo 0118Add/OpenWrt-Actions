@@ -3,7 +3,7 @@
 #################################################################
 
 # autocore
-git clone https://$github/sbwml/autocore-arm -b openwrt-24.10 package/system/autocore
+git clone https://$github/8688Add/autocore-arm -b openwrt-24.10 package/system/autocore
 
 # rockchip - target - r4s/r5s only
 rm -rf target/linux/rockchip
@@ -48,7 +48,7 @@ curl -s $mirror/openwrt/patch/kernel-6.13/openwrt/fix-openwrt-kmod-module-symver
 local_kernel_version=$(sed -n 's/^LINUX_KERNEL_HASH-\([0-9.]\+\) = .*/\1/p' include/kernel-6.13)
 release_kernel_version=$(curl -sL https://raw.githubusercontent.com/dd-ray/r5s_build_script/main/tags/kernel-6.13 | sed -n 's/^LINUX_KERNEL_HASH-\([0-9.]\+\) = .*/\1/p')
 if [ "$local_kernel_version" = "$release_kernel_version" ] && [ -z "$git_password" ] && [ "$(whoami)" != "sbwml" ]; then
-    git clone https://$github/dd-ray/target_linux_generic -b openwrt-24.10 target/linux/generic-6.13 --depth=1
+    git clone https://$github/0118Add/OpenWrt-Actions -b openwrt-24.10 target/linux/generic-6.13 --depth=1
 else
     if [ "$(whoami)" = "runner" ]; then
         git_name=private
