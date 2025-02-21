@@ -50,7 +50,7 @@ curl -s $mirror/openwrt/patch/kernel-6.13/openwrt/linux-6.13-target-linux-generi
 # Fix the loss of module.symvers
 curl -s $mirror/openwrt/patch/kernel-6.13/openwrt/fix-openwrt-kmod-module-symvers.patch | patch -p1
 local_kernel_version=$(sed -n 's/^LINUX_KERNEL_HASH-\([0-9.]\+\) = .*/\1/p' include/kernel-6.13)
-release_kernel_version=$(curl -sL https://raw.githubusercontent.com/dd-ray/r5s_build_script/main/tags/kernel-6.13 | sed -n 's/^LINUX_KERNEL_HASH-\([0-9.]\+\) = .*/\1/p')
+release_kernel_version=$(curl -sL https://raw.githubusercontent.com/0118Add/OpenWrt-Actions/master/tags/kernel-6.13 | sed -n 's/^LINUX_KERNEL_HASH-\([0-9.]\+\) = .*/\1/p')
 if [ "$local_kernel_version" = "$release_kernel_version" ] && [ -z "$git_password" ] && [ "$(whoami)" != "sbwml" ]; then
     git clone https://$github/dd-ray/target_linux_generic -b openwrt-24.10 target/linux/generic-6.13 --depth=1
 else
