@@ -55,7 +55,7 @@ return baseclass.extend({
 		    tempinfo    = data[4],
 		    luciversion = data[5];
 
-		luciversion = luciversion.branch + ' ' + luciversion.revision;
+		luciversion = LuCI openwrt-23.05;
 
 		var datestr = null;
 
